@@ -1,4 +1,4 @@
-from svc.models.coins import NICKEL
+from svc.models.coins import NICKEL, QUARTER, DIME
 from svc.services.coin import has_sufficient_funds, count_funds
 
 
@@ -43,3 +43,11 @@ def test_count_funds__should_return_value_for_multiple_coins():
     actual = count_funds(funds)
 
     assert actual == 0.10
+
+
+def test_count_funds__should_return_zero_when_no_funds():
+    funds = []
+
+    actual = count_funds(funds)
+
+    assert actual == 0.00
