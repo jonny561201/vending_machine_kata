@@ -17,3 +17,12 @@ def test_controller__should_return_message_for_insufficient_funds(mock_funds):
     actual = controller(None, None)
 
     assert actual['message'] == 'Insufficient funds supplied!'
+
+
+@patch('svc.controllers.vending_machine_controller.has_sufficient_funds')
+def test_controller__should_return_success_message_when_able_to_purchase(mock_funds):
+    mock_funds.return_value = True
+
+    actual = controller(None, None)
+
+    assert actual['message'] == 'Thank you!'
