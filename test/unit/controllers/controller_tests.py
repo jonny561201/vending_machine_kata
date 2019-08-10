@@ -25,8 +25,9 @@ def test_controller__should_call_count_funds(mock_funds, mock_count):
 def test_controller__should_return_message_for_insufficient_funds(mock_funds, mock_count):
     mock_funds.return_value = False
 
-    actual = controller(None, None)
+    actual, succeeded = controller(None, None)
 
+    assert succeeded is False
     assert actual['message'] == 'Insufficient funds supplied!'
 
 
@@ -35,8 +36,9 @@ def test_controller__should_return_message_for_insufficient_funds(mock_funds, mo
 def test_controller__should_return_success_message_when_able_to_purchase(mock_funds, mock_count):
     mock_funds.return_value = True
 
-    actual = controller(None, None)
+    actual, succeeded = controller(None, None)
 
+    assert succeeded is True
     assert actual['message'] == 'Thank you!'
 
 
@@ -44,6 +46,7 @@ def test_controller__should_return_success_when_using_real_services():
     funds = [QUARTER, QUARTER, DIME]
     selection = 'B10'
 
-    actual = controller(selection, funds)
+    actual, succeeded = controller(selection, funds)
 
+    assert succeeded is True
     assert actual['message'] == 'Thank you!'

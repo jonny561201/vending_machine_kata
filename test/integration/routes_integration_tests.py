@@ -1,7 +1,7 @@
 import json
 
 from svc.manager import create_app
-from svc.models.coins import QUARTER
+from svc.models.coins import QUARTER, NICKEL
 
 
 class TestRouteIntegration:
@@ -18,7 +18,7 @@ class TestRouteIntegration:
         assert response.data == 'Success'
 
     def test_purchase__should_return_error_message_when_insufficient_funds(self):
-        request = {"coins": [QUARTER]}
+        request = {'coins': [], 'selection': 'B10'}
 
         response = self.test_client.post('purchase', data=json.dumps(request))
         json_response = json.loads(response.data)
@@ -27,7 +27,8 @@ class TestRouteIntegration:
         assert json_response['message'] == 'Insufficient funds supplied!'
 
     def test_purchase__should_return_success_when_provided_sufficient_monies(self):
-        response = self.test_client.post('purchase', data={})
+        request = {'coins': [NICKEL], 'selection': 'A3'}
+        response = self.test_client.post('purchase', data=json.dumps(request))
         json_response = json.loads(response.data)
 
         assert response.status_code == 200
