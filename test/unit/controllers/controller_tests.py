@@ -1,6 +1,7 @@
 from mock import patch
 
 from svc.controllers.vending_machine_controller import controller
+from svc.models.coins import DIME, QUARTER
 
 
 @patch('svc.controllers.vending_machine_controller.count_funds')
@@ -35,5 +36,14 @@ def test_controller__should_return_success_message_when_able_to_purchase(mock_fu
     mock_funds.return_value = True
 
     actual = controller(None, None)
+
+    assert actual['message'] == 'Thank you!'
+
+
+def test_controller__should_return_success_when_using_real_services():
+    funds = [QUARTER, QUARTER, DIME]
+    selection = 'B10'
+
+    actual = controller(selection, funds)
 
     assert actual['message'] == 'Thank you!'
