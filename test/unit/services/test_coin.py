@@ -17,3 +17,12 @@ def test_has_sufficient_funds__should_return_false_when_more_than_enough_funds_s
     actual = has_sufficient_funds(cost, amount)
 
     assert actual is False
+
+
+def test_has_sufficient_funds__should_return_true_when_cost_equal_amount():
+    cost = 0.75
+    amount = 0.75
+
+    actual = has_sufficient_funds(cost, amount)
+
+    assert actual is True
