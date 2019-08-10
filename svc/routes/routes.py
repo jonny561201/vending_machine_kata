@@ -2,6 +2,8 @@ import json
 
 from flask import Blueprint
 
+from svc.controllers.vending_machine_controller import controller
+
 route_blueprint = Blueprint('route_blueprint', __name__)
 
 
@@ -12,5 +14,5 @@ def health_status():
 
 @route_blueprint.route('/purchase', methods=['POST'])
 def purchase():
-    response = {'message': 'Thank you!'}
+    response = controller(None, None)
     return json.dumps(response)
