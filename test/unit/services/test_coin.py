@@ -1,4 +1,5 @@
-from svc.services.coin import has_sufficient_funds
+from svc.models.coins import NICKEL
+from svc.services.coin import has_sufficient_funds, count_funds
 
 
 def test_has_sufficient_funds__should_return_true_when_enough_funds_supplied():
@@ -26,3 +27,11 @@ def test_has_sufficient_funds__should_return_true_when_cost_equal_amount():
     actual = has_sufficient_funds(cost, amount)
 
     assert actual is True
+
+
+def test_count_funds__should_return_value_for_single_coin():
+    funds = [NICKEL]
+
+    actual = count_funds(funds)
+
+    assert actual == 0.05
