@@ -35,3 +35,11 @@ def test_count_funds__should_return_value_for_single_coin():
     actual = count_funds(funds)
 
     assert actual == 0.05
+
+
+def test_count_funds__should_return_value_for_multiple_coins():
+    funds = [NICKEL, NICKEL]
+
+    actual = count_funds(funds)
+
+    assert actual == 0.10

@@ -3,4 +3,9 @@ def has_sufficient_funds(cost, amount):
 
 
 def count_funds(funds):
-    return 0.05
+    amount = 0
+
+    for fund in funds:
+        amount += fund['value']
+
+    return amount
