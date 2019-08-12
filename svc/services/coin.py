@@ -1,4 +1,4 @@
-from svc.models.coins import QUARTER, VALID_COINS
+from svc.models.coins import VALID_COINS
 
 
 def has_sufficient_funds(cost, amount):
