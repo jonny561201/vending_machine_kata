@@ -1,7 +1,7 @@
 import json
 
 from svc.manager import create_app
-from svc.models.coins import QUARTER, NICKEL
+from svc.models.coins import NICKEL
 
 
 class TestRouteIntegration:

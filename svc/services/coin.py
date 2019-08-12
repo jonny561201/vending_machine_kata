@@ -9,3 +9,7 @@ def count_funds(funds):
         amount += fund['value']
 
     return amount
+
+
+def is_valid_coin(coin):
+    return True
