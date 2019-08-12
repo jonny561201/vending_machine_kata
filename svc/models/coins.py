@@ -29,5 +29,8 @@ DOLLAR = {
 }
 
 VALID_COINS = [
-    NICKEL
+    NICKEL,
+    DIME,
+    QUARTER,
+    DOLLAR
 ]

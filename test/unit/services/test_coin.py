@@ -1,4 +1,4 @@
-from svc.models.coins import NICKEL, QUARTER, DIME
+from svc.models.coins import NICKEL, QUARTER, DIME, DOLLAR
 from svc.services.coin import has_sufficient_funds, count_funds, is_valid_coin
 
 
@@ -55,6 +55,24 @@ def test_count_funds__should_return_zero_when_no_funds():
 
 def test_is_valid_coin__should_return_true_when_quarter_supplied():
     actual = is_valid_coin(QUARTER)
+
+    assert actual is True
+
+
+def test_is_valid_coin__should_return_true_when_nickel_supplied():
+    actual = is_valid_coin(NICKEL)
+
+    assert actual is True
+
+
+def test_is_valid_coin__should_return_true_when_dime_supplied():
+    actual = is_valid_coin(DIME)
+
+    assert actual is True
+
+
+def test_is_valid_coin__should_return_true_when_dollar_supplied():
+    actual = is_valid_coin(DOLLAR)
 
     assert actual is True
 
