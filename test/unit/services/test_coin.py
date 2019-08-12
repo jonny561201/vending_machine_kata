@@ -53,7 +53,14 @@ def test_count_funds__should_return_zero_when_no_funds():
     assert actual == 0.00
 
 
-def test_is_valid_coin__should_return_true_when_valid_coin_supplied():
+def test_is_valid_coin__should_return_true_when_quarter_supplied():
     actual = is_valid_coin(QUARTER)
 
     assert actual is True
+
+
+def test_is_valid_coin__should_return__when_valid_weight_coin_supplied():
+    invalid_coin = {'weight': 56.99}
+    actual = is_valid_coin(invalid_coin)
+
+    assert actual is False

@@ -1,3 +1,6 @@
+from svc.models.coins import QUARTER
+
+
 def has_sufficient_funds(cost, amount):
     return amount >= cost
 
@@ -12,4 +15,6 @@ def count_funds(funds):
 
 
 def is_valid_coin(coin):
-    return True
+    if coin['weight'] == QUARTER['weight']:
+        return True
+    return False
