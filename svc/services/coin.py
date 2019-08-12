@@ -17,5 +17,6 @@ def count_funds(funds):
 def is_valid_coin(coin):
     for valid_coin in VALID_COINS:
         if coin['weight'] == valid_coin['weight'] and coin['diameter'] == valid_coin['diameter']:
+            coin['value'] = valid_coin['value']
             return True
     return False

@@ -55,6 +55,16 @@ def test_controller__should_return_success_when_using_real_services():
     assert actual['message'] == 'Thank you!'
 
 
+def test_controller__should_return_success_when_using_real_services_and_coin_without_value():
+    funds = [{'weight': QUARTER['weight'], 'diameter': QUARTER['diameter']}]
+    selection = 'B10'
+
+    actual, succeeded = controller(selection, funds)
+
+    assert succeeded is True
+    assert actual['message'] == 'Thank you!'
+
+
 def test_controller__should_return_insufficient_funds_when_using_real_services_and_invalid_coins():
     funds = [{'weight': 18.28, 'diameter': 92.76}]
     selection = 'B10'

@@ -89,3 +89,12 @@ def test_is_valid_coin__should_return_false_when_invalid_diameter_coin_supplied(
     actual = is_valid_coin(invalid_coin)
 
     assert actual is False
+
+
+def test_is_valid_coin__should_assign_value_when_coin_is_valid():
+    valid_coin = {'weight': QUARTER['weight'], 'diameter': QUARTER['diameter']}
+
+    actual = is_valid_coin(valid_coin)
+
+    assert actual is True
+    assert valid_coin['value'] == 0.25
