@@ -15,6 +15,6 @@ def count_funds(funds):
 
 
 def is_valid_coin(coin):
-    if coin['weight'] == QUARTER['weight']:
+    if coin['weight'] == QUARTER['weight'] and coin['diameter'] == QUARTER['diameter']:
         return True
     return False
