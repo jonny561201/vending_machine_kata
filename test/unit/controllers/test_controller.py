@@ -6,21 +6,21 @@ from svc.models.coins import DIME, QUARTER
 
 @patch('svc.controllers.vending_machine_controller.coin')
 def test_controller__should_call_has_sufficient_funds(mock_coin):
-    controller(None, None)
+    controller(None, [QUARTER])
 
     mock_coin.has_sufficient_funds.assert_called_once()
 
 
 @patch('svc.controllers.vending_machine_controller.coin')
 def test_controller__should_call_count_funds(mock_coin):
-    controller(None, None)
+    controller(None, [QUARTER])
 
     mock_coin.count_funds.assert_called_once()
 
 
 @patch('svc.controllers.vending_machine_controller.coin')
 def test_controller__should_call_is_valid_coin(mock_coin):
-    controller(None, None)
+    controller(None, [QUARTER])
 
     mock_coin.is_valid_coin.assert_called_once()
 
@@ -29,7 +29,7 @@ def test_controller__should_call_is_valid_coin(mock_coin):
 def test_controller__should_return_message_for_insufficient_funds(mock_coin):
     mock_coin.has_sufficient_funds.return_value = False
 
-    actual, succeeded = controller(None, None)
+    actual, succeeded = controller(None, [QUARTER])
 
     assert succeeded is False
     assert actual['message'] == 'Insufficient funds supplied!'
@@ -39,7 +39,7 @@ def test_controller__should_return_message_for_insufficient_funds(mock_coin):
 def test_controller__should_return_success_message_when_able_to_purchase(mock_coin):
     mock_coin.has_sufficient_funds.return_value = True
 
-    actual, succeeded = controller(None, None)
+    actual, succeeded = controller(None, [QUARTER])
 
     assert succeeded is True
     assert actual['message'] == 'Thank you!'
@@ -53,3 +53,13 @@ def test_controller__should_return_success_when_using_real_services():
 
     assert succeeded is True
     assert actual['message'] == 'Thank you!'
+
+
+def test_controller__should_return_insufficient_funds_when_using_real_services_and_invalid_coins():
+    funds = [{'weight': 18.28, 'diameter': 92.76}]
+    selection = 'B10'
+
+    actual, succeeded = controller(selection, funds)
+
+    assert succeeded is False
+    assert actual['message'] == 'Insufficient funds supplied!'
