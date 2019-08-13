@@ -15,7 +15,7 @@ class TestRouteIntegration:
         response = self.test_client.get('healthCheck')
 
         assert response.status_code == 200
-        assert response.data == 'Success'
+        assert response.data.decode('UTF-8') == 'Success'
 
     def test_purchase__should_return_error_message_when_insufficient_funds(self):
         request = {'coins': [], 'selection': 'B10'}
