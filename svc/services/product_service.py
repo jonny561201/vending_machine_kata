@@ -8,6 +8,6 @@ def is_product_available(selection):
 
 def get_product_cost(selection):
     products = get_product_by_location(selection)
-
-    return products[0]['cost']
-
+    if len(products) > 0:
+        return products[0]['cost']
+    return 0

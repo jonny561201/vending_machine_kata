@@ -32,3 +32,13 @@ def test_get_product_cost__should_return_cost(mock_database):
     actual = get_product_cost(selection)
 
     assert actual == cost
+
+
+@patch('svc.services.product_service.get_product_by_location')
+def test_get_product_cost__should_return_zero_when_no_product(mock_database):
+    selection = 'B10'
+    mock_database.return_value = []
+
+    actual = get_product_cost(selection)
+
+    assert actual == 0.00
