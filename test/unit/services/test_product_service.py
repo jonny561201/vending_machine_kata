@@ -12,3 +12,11 @@ def test_is_product_available__should_return_true_when_product_is_returned(mock_
 
     assert actual is True
 
+
+@patch('svc.services.product_service.get_product_by_location')
+def test_is_product_available__should_return_false_when_products_are_empty(mock_database):
+    mock_database.return_value = []
+    selection = 'A1'
+    actual = is_product_available(selection)
+
+    assert actual is False
