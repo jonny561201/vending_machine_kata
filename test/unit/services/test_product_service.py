@@ -1,6 +1,6 @@
 from mock import patch
 
-from svc.services.product_service import is_product_available
+from svc.services.product_service import is_product_available, get_product_cost
 
 
 @patch('svc.services.product_service.get_product_by_location')
@@ -20,3 +20,15 @@ def test_is_product_available__should_return_false_when_products_are_empty(mock_
     actual = is_product_available(selection)
 
     assert actual is False
+
+
+@patch('svc.services.product_service.get_product_by_location')
+def test_get_product_cost__should_return_cost(mock_database):
+    cost = 0.75
+    product = {'cost': cost}
+    selection = 'B10'
+    mock_database.return_value = [product]
+
+    actual = get_product_cost(selection)
+
+    assert actual == cost
