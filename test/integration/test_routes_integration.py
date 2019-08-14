@@ -26,6 +26,15 @@ class TestRouteIntegration:
         assert response.status_code == 400
         assert json_response['message'] == 'Insufficient funds supplied!'
 
+    def test_purchase__should_return_error_message_when_product_is_unavailable(self):
+        request = {'coins': [], 'selection': 'B10'}
+
+        response = self.test_client.post('purchase', data=json.dumps(request))
+        json_response = json.loads(response.data)
+
+        assert response.status_code == 400
+        assert json_response['message'] == 'Product is unavailable!'
+
     def test_purchase__should_return_success_when_provided_sufficient_monies(self):
         request = {'coins': [NICKEL], 'selection': 'A3'}
         response = self.test_client.post('purchase', data=json.dumps(request))
