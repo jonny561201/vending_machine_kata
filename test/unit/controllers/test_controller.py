@@ -68,6 +68,7 @@ def test_controller__should_return_success_message_when_able_to_purchase(mock_co
 
 @patch('svc.controllers.vending_machine_controller.ProductService')
 def test_controller__should_return_success_when_using_real_services(mock_product):
+    mock_product.return_value.get_product_cost.return_value = 0.50
     funds = [QUARTER, QUARTER, DIME]
     selection = 'B10'
 
@@ -79,6 +80,7 @@ def test_controller__should_return_success_when_using_real_services(mock_product
 
 @patch('svc.controllers.vending_machine_controller.ProductService')
 def test_controller__should_return_success_when_using_real_services_and_coin_without_value(mock_product):
+    mock_product.return_value.get_product_cost.return_value = 0.25
     funds = [{'weight': QUARTER['weight'], 'diameter': QUARTER['diameter']}]
     selection = 'B10'
 
@@ -90,8 +92,21 @@ def test_controller__should_return_success_when_using_real_services_and_coin_wit
 
 @patch('svc.controllers.vending_machine_controller.ProductService')
 def test_controller__should_return_insufficient_funds_when_using_real_services_and_invalid_coins(mock_product):
+    mock_product.return_value.get_product_cost.return_value = 0.05
     funds = [{'weight': 18.28, 'diameter': 92.76}]
     selection = 'B10'
+
+    actual, succeeded = controller(selection, funds)
+
+    assert succeeded is False
+    assert actual['message'] == 'Insufficient funds supplied!'
+
+
+@patch('svc.controllers.vending_machine_controller.ProductService')
+def test_controller__should_return_insufficient_funds_when_using_real_services_and_valid_coins(mock_product):
+    funds = [QUARTER, QUARTER]
+    selection = 'B10'
+    mock_product.return_value.get_product_cost.return_value = 0.75
 
     actual, succeeded = controller(selection, funds)
 
