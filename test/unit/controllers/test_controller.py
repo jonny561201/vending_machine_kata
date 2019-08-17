@@ -38,6 +38,14 @@ def test_controller__should_call_is_product_available(mock_coin, mock_product):
 
 @patch('svc.controllers.vending_machine_controller.ProductService')
 @patch('svc.controllers.vending_machine_controller.coin_service')
+def test_controller__should_call_get_product_cost(mock_coin, mock_product):
+    controller(None, [QUARTER])
+
+    mock_product.return_value.get_product_cost.assert_called_once()
+
+
+@patch('svc.controllers.vending_machine_controller.ProductService')
+@patch('svc.controllers.vending_machine_controller.coin_service')
 def test_controller__should_return_message_for_insufficient_funds(mock_coin, mock_product):
     mock_coin.has_sufficient_funds.return_value = False
 
